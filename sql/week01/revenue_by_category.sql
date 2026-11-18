@@ -12,3 +12,4 @@
 
 SELECT NULL::text AS category, NULL::numeric AS total_revenue
 WHERE FALSE;
+

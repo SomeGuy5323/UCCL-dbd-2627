@@ -8,5 +8,13 @@
 -- (ties WILL happen in this data -- always give ORDER BY a tiebreaker when
 -- the primary sort key can repeat, or your result order isn't guaranteed).
 
-SELECT NULL::text AS customer_city, NULL::bigint AS order_count
-WHERE FALSE;
+
+
+SELECT c.customer_city, COUNT(o.order_id) as order_count 
+FROM orders o 
+JOIN customers c ON c.customer_id = o.customer_id
+GROUP BY c.customer_city 
+HAVING COUNT(o.order_id) > 1
+ORDER BY order_count DESC, customer_city ASC;
+
+
