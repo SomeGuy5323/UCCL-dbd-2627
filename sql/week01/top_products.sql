@@ -10,10 +10,11 @@
 -- most databases, not just Postgres) and it's what the rest of this course
 -- uses -- see week05's pagination widget for FETCH's other half, OFFSET.
 --
--- Hint: JOIN order_items to products for product_name (and the category,
--- if you want it -- not required here, but good practice for later weeks).
 
-SELECT NULL::text AS product_id, NULL::text AS product_name, NULL::numeric AS total_revenue
-WHERE FALSE;
--- ^ placeholder so the widget builds and shows "locked" instead of erroring.
--- Replace this whole query with your own.
+
+SELECT p.product_id, p.product_name, SUM(o.price) as total_revenue FROM order_items o
+JOIN products p ON p.product_id = o.product_id
+GROUP BY p.product_id
+ORDER BY total_revenue DESC
+FETCH FIRST 5 ROWS ONLY;
+

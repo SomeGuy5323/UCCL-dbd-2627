@@ -14,3 +14,5 @@
 
 SELECT NULL::text AS payment_type, NULL::bigint AS payment_count
 WHERE FALSE;
+
+
